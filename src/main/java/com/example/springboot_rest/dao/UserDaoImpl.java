@@ -1,6 +1,7 @@
 package com.example.springboot_rest.dao;
 
 import com.example.springboot_rest.models.User;
+import com.example.springboot_rest.service.UserServiceImpl;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,12 +23,6 @@ public class  UserDaoImpl implements UserDao {
         return entityManager.createQuery("from User", User.class).getResultList();
     }
 
-    @Override
-    public User getUserName(String name) {
-        Query query = entityManager.createQuery("from User u join fetch u.roles where u.username =: name ");
-        query.setParameter("name", name);
-        return (User)query.getSingleResult();
-    }
 
     @Override
     public User showUserById(int id) {
@@ -49,9 +44,18 @@ public class  UserDaoImpl implements UserDao {
     @Override
     @Transactional
     public void removeUser(int id) {
-        User user = entityManager.find(User.class, id);
-        entityManager.remove(user);
+       // User user = entityManager.find(User.class, id);
+       // entityManager.remove(user);
+
+        Query query = entityManager.createQuery("DELETE FROM User WHERE id = :developerId");
+        query.setParameter("developerId", id);
+        query.executeUpdate();
     }
 
-
+    @Override
+    public User getUserName(String name) {
+        Query query = entityManager.createQuery("from User u join fetch u.roles where u.username =: name ");
+        query.setParameter("name", name);
+        return (User)query.getSingleResult();
+    }
 }

@@ -19,9 +19,6 @@ public class DataInitializer {
     private RoleService roleService;
 
     @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    @Autowired
     public DataInitializer(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
@@ -45,13 +42,11 @@ public class DataInitializer {
         user.add(role2);
 
         User user1 = new User(24, "shirshov","admin" , "admin");
-        user1.setPassword(bCryptPasswordEncoder.encode(user1.getPassword()));
         user1.setRoles(admin);
-        userService.addUser(user1);
+        userService.save(user1);
 
         User user2 = new User(30, "userov", "user", "user");
-        user2.setPassword(bCryptPasswordEncoder.encode(user2.getPassword()));
         user2.setRoles(user);
-        userService.addUser(user2);
+        userService.save(user2);
     }
 }

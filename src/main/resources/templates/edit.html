@@ -8,17 +8,17 @@
 <body>
 <form th:method="PUT" th:action="@{/admin/{id}(id=${person.getId()})}" th:object="${person}">
     <label for="username"> Enter name: </label>
-    <input type="text" th:field="*{username}" id="username"/>
+    <input type="text" required="required" th:field="*{username}" id="username"/>
     <br/>
     <label for="surName"> Enter surName: </label>
-    <input type="text" th:field="*{surName}" id="surName"/>
+    <input type="text" required="required" th:field="*{surName}" id="surName"/>
     <br/>
     <label for="age"> Enter age: </label>
-    <input type="text" th:field="*{age}" id="age"/>
+    <input type="text"  required="required" th:field="*{age}" id="age"/>
     <br/>
 
     <label for="password"> Enter Password: </label>
-    <input type="password" name="pass" th:field="*{password}" id="password"/>
+    <input type="password" name="pass" required="required" th:field="*{password}" id="password"/>
     <br/>
     <ul class="checkbox-list">
         <li th:each="role:${roles}">
